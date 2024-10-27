@@ -1,5 +1,6 @@
 package com.example.bookuser.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +19,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID authorId;
     private String authorName;
-
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
     private List<Book> book;
 }

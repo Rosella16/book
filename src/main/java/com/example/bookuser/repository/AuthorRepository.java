@@ -2,8 +2,11 @@ package com.example.bookuser.repository;
 
 import com.example.bookuser.model.entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<Author, UUID> {
+@Repository
+public interface AuthorRepository extends JpaRepository<Author, UUID> {
+
 }
