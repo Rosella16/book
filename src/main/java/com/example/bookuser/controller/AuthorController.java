@@ -34,21 +34,48 @@ public class AuthorController {
 
     }
     @GetMapping("get-all-authors")
-    public List<Author> getAllAuthor(){
-        return authorService.getAllAuthor();
+    public ResponseEntity<ApiResponse<List<Author>>> getAllAuthor(){
+        List<Author> author = authorService.getAllAuthor();
+        ApiResponse<List<Author>> response = ApiResponse.<List<Author>>builder()
+                .message("sucessfully get all authors")
+                .status(HttpStatus.OK)
+                .payload(author)
+                .date(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
     }
     @DeleteMapping("/{authorId}")
-    public ResponseEntity deleteAuthorById(@PathVariable UUID authorId) {
+    public ResponseEntity<ApiResponse<Void>> deleteAuthorById(@PathVariable UUID authorId) {
         authorService.deleteAuthorById(authorId);
-       return ResponseEntity.ok("delete succesfully");
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .message("Successfully deleted author by id")
+                .status(HttpStatus.OK)
+                .date(LocalDateTime.now())
+                .build();
+       return ResponseEntity.ok(response);
     }
     @GetMapping("/{authorId}")
-    public Author getAuthorById(@PathVariable UUID authorId) {
-        return authorService.getAuthorById(authorId);
+    public ResponseEntity<ApiResponse<Author>> getAuthorById(@PathVariable UUID authorId) {
+        Author author = authorService.getAuthorById(authorId);
+        ApiResponse<Author> response = ApiResponse.<Author>builder()
+                .message("Successfully get author by id")
+                .status(HttpStatus.OK)
+                .payload(author)
+                .date(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
     }
     @PutMapping("/{authorId}")
-    public Author updateAuthorById(@PathVariable UUID authorId, @RequestBody AuthorRequest authorRequest) {
-        return authorService.updateAuthorById(authorId, authorRequest);
+    public ResponseEntity<ApiResponse<Author>> updateAuthorById(@PathVariable UUID authorId, @RequestBody AuthorRequest authorRequest) {
+        Author author = authorService.updateAuthorById(authorId, authorRequest);
+        ApiResponse<Author> response = ApiResponse.<Author>builder()
+                .message("Successfully update author by id")
+                .status(HttpStatus.OK)
+                .payload(author)
+                .date(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
     }
+
 
 }

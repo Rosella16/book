@@ -4,6 +4,7 @@ import com.example.bookuser.model.entity.Author;
 import com.example.bookuser.model.entity.Book;
 import com.example.bookuser.model.request.AuthorRequest;
 import com.example.bookuser.model.request.BookRequest;
+import com.example.bookuser.model.response.BookResponse;
 import com.example.bookuser.repository.AuthorRepository;
 import com.example.bookuser.repository.BookRepository;
 import com.example.bookuser.service.BookService;
@@ -55,5 +56,11 @@ public class BookServiceImpl implements BookService {
         Author author = authorRepository.findById(bookRequest.getAuthorId()).orElseThrow();
         existingBook.setAuthor(author);
         return bookRepository.save(existingBook);
+    }
+
+    @Override
+    public List<Book> getBookByBookTitle(String bookTitle) {
+        List<Book> book = bookRepository.findByBookTitle(bookTitle);
+        return book;
     }
 }
