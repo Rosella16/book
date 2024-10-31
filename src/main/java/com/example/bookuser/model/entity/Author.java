@@ -1,5 +1,6 @@
 package com.example.bookuser.model.entity;
 
+import com.example.bookuser.model.response.AuthorResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,4 +23,8 @@ public class Author {
     @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Book> book;
+
+    public AuthorResponse toResponse(){
+        return new AuthorResponse(this.authorId, this.authorName);
+    }
 }

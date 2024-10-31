@@ -2,8 +2,10 @@ package com.example.bookuser.service.serviceImpl;
 
 import com.example.bookuser.model.entity.Author;
 import com.example.bookuser.model.request.AuthorRequest;
+import com.example.bookuser.model.response.AuthorResponse;
 import com.example.bookuser.repository.AuthorRepository;
 import com.example.bookuser.service.AuthorService;
+import com.example.bookuser.util.ApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,11 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
 
     @Override
-    public Author createAuthor(AuthorRequest authorRequest) {
+    public AuthorResponse createAuthor(AuthorRequest authorRequest) {
         Author newAuthor = new Author();
         newAuthor.setAuthorName(authorRequest.getAuthorName());
+         return authorRepository.save(newAuthor).toResponse();
 
-        return authorRepository.save(newAuthor);
     }
 
     @Override
